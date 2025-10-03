@@ -22,7 +22,7 @@ int main() {
   float superpoder1, superpoder2;
 
   // variaves exibição de dados
-  int opcao;
+  int atributo1, atributo2;
 
   // Área para entrada de dados
   printf("Cadastro de duas cartas\n");
@@ -122,69 +122,114 @@ int main() {
     printf("5 - Densidade Populacional (menor vence)\n");
     printf("6 - PIB per capita\n");
     printf("7 - Super Poder\n");
-    printf("Escolha uma opcao: ");
-    scanf("%d", &opcao);
+
+    printf("Escolha o seu primeiro atributo: ");
+    scanf("%d", &atributo1);
 
     printf(" RESULTADO\n");
 
-    switch(opcao) {
-        case 1:
-            if (populacao1 > populacao2)
-                printf("%s venceu (maior população).\n", cidade1);
-            else
-                printf("%s venceu (maior população).\n", cidade2);
-            break;
+    printf("\nEscolha o segundo atributo (diferente do primeiro):\n");
+    for (int i = 1; i <= 7; i++) {
+        if (i != atributo1) {
+            switch(i) {
+                case 1: printf("1 - População\n"); 
+                break;
+                case 2: printf("2 - Área\n");
+                break;
+                case 3: printf("3 - PIB\n");
+                break;
+                case 4: printf("4 - Pontos Turísticos\n"); 
+                break;
+                case 5: printf("5 - Densidade Populacional\n"); 
+                break;
+                case 6: printf("6 - PIB per capita\n"); 
+                break;
+                case 7: printf("7 - Super Poder\n"); 
+                break;
+            }
+        }
+    }
+    printf("Escolha: ");
+    scanf("%d", &atributo2);
 
-        case 2:
-            if (area1 > area2)
-                printf("%s venceu (maior área).\n", cidade1);
-            else
-                printf("%s venceu (maior área).\n", cidade2);
-            break;
+    // Função para obter valores de acordo com o atributo
+    float v1a=0, v2a=0, v1b=0, v2b=0;
+    char nome1[30], nome2[30];
 
-        case 3:
-            if (pib1 > pib2)
-                printf("%s venceu (maior PIB).\n", cidade1);
-            else
-                printf("%s venceu (maior PIB).\n", cidade2);
-            break;
-
-        case 4:
-            if (pontos1 > pontos2)
-                printf("%s venceu (mais pontos turísticos).\n", cidade1);
-            else
-                printf("%s venceu (mais pontos turísticos).\n", cidade2);
-            break;
-
-        case 5:
-            if (densidade1 < densidade2)
-                printf("%s venceu (menor densidade populacional).\n", cidade1);
-            else
-                printf("%s venceu (menor densidade populacional).\n", cidade2);
-            break;
-
-        case 6:
-            if (pibper1 > pibper2)
-                printf("%s venceu (maior PIB per capita).\n", cidade1);
-            else
-                printf("%s venceu (maior PIB per capita).\n", cidade2);
-            break;
-
-        case 7:
-            if (superpoder1 > superpoder2)
-                printf("%s venceu (maior super poder).\n", cidade1);
-            else
-                printf("%s venceu (maior super poder).\n", cidade2);
-            break;
-
-        default:
-            printf("Opção inválida.\n");
+    // Primeiro atributo
+    switch(atributo1) {
+        case 1: v1a = populacao1; v2a = populacao2; 
+        sprintf(nome1,"População"); 
+        break;
+        case 2: v1a = area1; v2a = area2;
+        sprintf(nome1,"Área");
+        break;
+        case 3: v1a = pib1; v2a = pib2; 
+        sprintf(nome1,"PIB"); 
+        break;
+        case 4: v1a = pontos1; v2a = pontos2; 
+        sprintf(nome1,"Pontos Turísticos"); 
+        break;
+        case 5: v1a = densidade1; v2a = densidade2;
+        sprintf(nome1,"Densidade"); 
+        break;
+        case 6: v1a = pibper1; v2a = pibper2; 
+        sprintf(nome1,"PIB per capita");
+        break;
+        case 7: v1a = superpoder1; v2a = superpoder2; 
+        sprintf(nome1,"Super Poder"); 
+        break;
+        default: printf("Atributo inválido!\n"); 
+        return 0;
     }
 
+    // Segundo atributo
+    switch(atributo2) {
+        case 1: v1b = populacao1; v2b = populacao2; 
+        sprintf(nome2,"População"); 
+        break;
+        case 2: v1b = area1; v2b = area2; 
+        sprintf(nome2,"Área"); 
+        break;
+        case 3: v1b = pib1; v2b = pib2; 
+        sprintf(nome2,"PIB"); 
+        break;
+        case 4: v1b = pontos1; v2b = pontos2; 
+        sprintf(nome2,"Pontos Turísticos"); 
+        break;
+        case 5: v1b = densidade1; v2b = densidade2; 
+        sprintf(nome2,"Densidade"); 
+        break;
+        case 6: v1b = pibper1; v2b = pibper2; 
+        sprintf(nome2,"PIB per capita"); 
+        break;
+        case 7: v1b = superpoder1; v2b = superpoder2; 
+        sprintf(nome2,"Super Poder"); 
+        break;
+        default: printf("Atributo inválido!\n"); 
+        return 0;
+    }
 
- 
+    //  densidade 
+    float soma1 = 0, soma2 = 0;
+    soma1 += (atributo1 == 5) ? (1/v1a) : v1a;
+    soma2 += (atributo1 == 5) ? (1/v2a) : v2a;
+    soma1 += (atributo2 == 5) ? (1/v1b) : v1b;
+    soma2 += (atributo2 == 5) ? (1/v2b) : v2b;
 
+    
+    printf(" Resultado\n");
+    printf("%s (%s): %s=%.2f | %s=%.2f | Soma=%.2f\n", codigo1, cidade1, nome1, v1a, nome2, v1b, soma1);
+    printf("%s (%s): %s=%.2f | %s=%.2f | Soma=%.2f\n", codigo2, cidade2, nome1, v2a, nome2, v2b, soma2);
 
+    if (soma1 > soma2)
+        printf("%s venceu!\n", cidade1);
+    else if (soma2 > soma1)
+        printf("%s venceu!\n", cidade2);
+    else
+        printf("\n Empate!\n");
+
+    
 
     return 0;
 }
